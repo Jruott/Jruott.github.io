@@ -1,0 +1,178 @@
+﻿<!--
+	作者：Jruott@gmail.com
+	时间：2014-05-13
+	描述：http://tool.oschina.net/regex#
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>在线正则表示式匹配</title>
+		<style type="text/css">
+			body{
+				margin:0 auto;
+				width:100%;
+				height:100%;
+				font-family:Microsoft YaHei, 微软雅黑, Verdana, sans-serif, 宋体;
+			}
+			#page{
+				width:90%;
+				
+				margin: 0 auto;
+			}
+			#title{
+				width:100%;
+				height:80px;
+				background: 
+				line-height: 80px;
+				font-weight: 900;
+				font-size: 2em;
+			}
+			#mian{
+				width:100%;
+				height:880px;
+			}
+			#left{
+				width:65%;
+				height:800px;
+				float:left;
+				margin-left:10px;
+			}
+			#right{
+				width:30%;
+				height: 800px;
+				float: right;
+				margin-right:10px;
+				background: #edf5f7;
+			}
+			/*左边*/
+			#matchWords{
+				width:100%;
+				height:21.2%;  /*70/800*/
+			}
+			#matchBox{
+				width:99%;
+				height:98%;
+				overflow:hidden;
+			}
+			#regexp{
+				width:99.5%;
+				border:solid 1px;
+				margin-top:3.1%;   /*25/800*/
+				font-size: 12px;
+				text-align: center;
+				padding-top: 24px;  /*垂直居中*/
+				padding-bottom: 24px;
+			}
+			#regexp input{
+				font-size: 12px;
+			}
+			#regexpBox{
+				width:35%;
+				height: 30.4%;  /*30/78*/
+			}
+			#regexpWord{
+				width:10%;
+				height:30.4%;
+				border:1px solid;
+				font-size: 12px;
+			}
+			#regexpBottom{
+				display: inline-block;
+				width:15%;
+				height:30.4%;
+				border:1px solid;
+				border-radius:5px 5px;
+				cursor:pointer;
+				font-size: 12px;
+			}
+			
+			#result{
+				width:100%;
+				height:23.6%;   /*189/800*/
+				margin-top:4%;   
+			}
+			#resultBox{
+				width:99.5%;
+				height: 80%;
+				border:1px solid;
+			}
+			
+			/*右边*/
+			#rightMain h2{
+				text-indent:2em;
+				color:#816d65;	
+			}
+			ul li{
+				list-style:none;
+				font-size:16px;
+				font-family:Microsoft YaHei, 微软雅黑, Verdana, sans-serif, 宋体;
+				color:#816d65;
+				height:2em;
+				width:85%;
+				line-height: 2em;
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="page">
+			<div id="title">
+				在线工具
+			</div>
+			<div id="mian">
+				<div id="left">
+					<div id="matchWords">
+						<textarea id="matchBox" >在此输入待匹配文本</textarea>
+					</div>
+					
+					<div id="regexp">
+						<span id="regexpWord">
+							正则表达式
+						</span>
+						<input type="text"  id="regexpBox" value="在此输入正则表达式" />
+						<div id="regexpBottom">
+							测试匹配
+						</div>
+					</div>
+					
+					<div id="result">
+						<div id="">
+							匹配结果：
+						</div>
+						<textarea id="resultBox"></textarea>
+					</div>
+				</div>
+				<div id="right">
+					<div id="rightMain">
+						<h2> 
+							常用正则表达式
+						</h2>
+						<ul>
+							<li value="1">匹配中文字符</li>
+							<li value="2">匹配双字节字符（包括汉字在内）</li>
+							<li value="3">匹配空白行</li>
+							<li value="4">匹配Email地址</li>
+							<li value="5">匹配网址URL</li>
+							<li value="6">匹配国内电话号码</li>
+							<li value="7">匹配腾讯qq号</li>
+							<li value="8">匹配中国邮政编码</li>
+							<li value="9">匹配18位身份证号</li>
+							<li value="10">匹配(年-月-日)格式日期</li>
+							<li value="11">匹配正整数</li>
+							<li value="12">匹配负整数</li>
+							<li value="13">匹配整数</li>
+							<li value="14">匹配非负整数</li>
+							<li value="15">匹配非正整数</li>
+							<li value="16">匹配正浮点数</li>
+							<li value="17">匹配负浮点数</li>
+							<li value="18">是否只由汉字、字母、数字组成</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/myRegexp.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
