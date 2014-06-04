@@ -88,13 +88,13 @@ $(function(){
 	
 	/*Add PageNum*/
 	for(var i=0;i<=maxIndex;i++){
-		$('.imgPage').append('<li class="num'+i+'"></li>');
+		$('.imgPage').append('<li class="num' + i + '"></li>');
 	}
 	
 	/*PageNum click*/
 	$pageNum = $('.imgPage li');
 	$pageNum.eq(0).addClass('current');
-	$pageNum .live('mouseover',function(){
+	$pageNum .bind('mouseover',function(){
 		$(this).addClass('current').siblings().removeClass('current');
 		index = page = $pageNum.index($(this));
 		title = $img.eq(index).attr("alt");

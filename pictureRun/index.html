@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			ul{
+				list-style: none;
+			}
+			body, div, ul, li {
+				margin:0px;
+				padding:0px;
+			}
+			ul.imgList li {
+				float:left
+			}
+			div.imgWrap{    /*设定了外部总长度和宽度，刚好够一张图片，即使设置了li的float为left也会将其他图片挤下来，然后再设置overflow：hidden就将其他的隐藏了*/
+				position : relative;
+				width:960px;
+				height:230px;
+				overflow:hidden;
+				margin: 10px;
+			}
+			
+			i#prev{
+				left:50px;
+			}
+			i#next {
+			 	right:50px;
+			}	
+			i#prev, i#next{  /*因为*/
+				display: block;
+			
+				position:absolute;
+				top:80px;
+				cursor:pointer;
+				z-index : 9;
+				transition: all 0.5s ease-out 0s;
+				-ms-transition:  all 0.5s  ease-out 0s;
+				-webkit-transition: all 0.5s  ease-out 0s;
+				-moz-transition: all 0.5s  ease-out 0s;
+				-o-transition: all 0.5s  ease-out 0s;
+			}
+			i#prev:hover, i#next:hover{
+				transform: scale(1.2);
+				-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				-o-transform:scale(1.2);
+				-ms-transform: scale(1.2);
+			}
+			div.caption{
+				width:100%;
+				height:30px;
+				line-height: 30px;
+				opacity:0.5;
+				background: #585858;
+				position:absolute;
+				bottom:0;
+				left:0;
+				color:#fff;
+				font-family:Arial, Helvetica, sans-serif;
+				font-size:18px;
+				font-weight: 600;
+				text-indent: 50px;
+			}
+			.imgPage{
+				position: absolute;
+				bottom:10px;
+				right:100px;
+				z-index:2;
+			}
+			.imgPage li{
+				display: block;
+				float:left;
+				width:10px;
+				height:10px;
+				background: #094C06;
+				margin-left: 5px;
+				cursor:pointer;
+				z-index: 2;
+			}
+			.imgPage li.current{
+				background: rgb(65,194,102);
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+	 	 <div class="imgWrap"> 
+	 	 	<i id="prev"><img src="img/return.png"/></i> 
+	 	 	<i id="next"><img src="img/forward.png"/></i>
+			  <ul class="imgList">
+			    <li><a href="#"><img src="img/1.jpg" alt="title_a1"></a></li>
+			    <li><a href="#"><img src="img/2.jpg" alt="title_a2"></a></li>
+			    <li><a href="#"><img src="img/3.jpg" alt="title_a3"></a></li>
+			    <li><a href="#"><img src="img/4.jpg" alt="title_a4"></a></li>
+			    <li><a href="#"><img src="img/5.jpg" alt="title_a5"></a></li>
+			  </ul>
+			  <ul class="imgPage"></ul>
+			  <div class="caption"></div>
+		</div>
+		
+		<script type="text/javascript" charset="utf-8">
+			$(function(){
+				$img = $(".imgList img");
+				$caption = $(".caption");
+				var index = 0;
+				var page = '';
+				var maxIndex = $img.length - 1;
+				
+				/*Add title*/
+				var title = $img.eq(0).attr("alt");
+				$caption.text(title);
+				
+				/*Add PageNum*/
+				for(var i = 0; i <= maxIndex; i++){
+					$(".imgPage").append("<li class= 'num" + i + "'</li>");
+				}
+				
+				/*Page click*/
+				$imgPage= $(".imgPage li");
+				$imgPage.eq(0).addClass("current");
+				$imgPage.bind("mouseover",function(){
+					$(this).addClass("current").siblings().removeClass('current');   //此li标签增加current类，其他li标签移除current类
+					index = page = $imgPage.index($(this)); //得到当前li所在的index 
+					title = $img.eq(index).attr("alt");   //显示当前这张图片的title
+					$caption.text(title);
+	            	$img.fadeOut().eq(page).fadeIn(); //全部淡出隐藏，再将鼠标移动到的图片淡入
+				});
+				
+				/*Prev click*/
+				$prev = $("#prev");
+				$prev.bind("click",function(){
+					if(index > 0){
+						$imgPage.eq(index-1).addClass("current").siblings().removeClass("current");
+						title = $img.eq(index-1).attr("alt");
+						$caption.text(title);
+						$img.fadeOut().eq(index-1).fadeIn();
+					    index--;
+					}else{
+						$imgPage.eq(maxIndex).addClass("current").siblings().removeClass("current");
+						title = $img.eq(maxIndex).attr("alt");
+						$caption.text(title);
+						$img.eq(0).fadeOut().end().eq(maxIndex ).fadeIn();
+						index = maxIndex;
+					}
+				});
+				
+				/*Next click*/
+				$next = $("#next");
+				$next.bind("click",function(){
+					if(index < maxIndex){
+						$imgPage.eq(index+1).addClass("current").siblings().removeClass("current");
+						title = $img.eq(index+1).attr("alt");
+						$caption.text(title);
+						$img.fadeOut().eq(index+1).fadeIn();
+					    index++;
+					}else{
+						$imgPage.eq(0).addClass("current").siblings().removeClass("current");
+						title = $img.eq(0).attr("alt");
+						$caption.text(title);
+						$img.fadeOut().eq(0).fadeIn();
+					    index = 0;
+					}
+				});
+			})
+		</script>
+	</body>
+</html>
