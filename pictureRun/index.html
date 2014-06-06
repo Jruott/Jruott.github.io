@@ -82,10 +82,115 @@
 			.imgPage li.current{
 				background: rgb(65,194,102);
 			}
+
+			/*侧边气泡*/
+			#broadside{
+				width:300px;
+				height:190px;
+				position:fixed;
+				z-index:2;
+				bottom:300px;
+				right:0px;
+			}
+			#bar{
+				width:108px;
+				height:28px;
+			    line-height:28px;
+				background: #00a3cf;
+				position:absolute;
+				right:0px;
+				bottom:0px;
+			}
+			.words{
+			    text-indent:1em;
+				color:white;
+				font-size:14px;
+				font-weight:900;
+				font-family:Microsoft YaHei, 微软雅黑, Verdana, sans-serif, 宋体;
+			}
+			#bar #add{
+				display:block;
+			    position:absolute;
+			    right:0px;
+			    top:1px;
+			    cursor:pointer;
+			}
+			#mainside{
+				width:300px;
+				height:185px;
+				background: #edf5f7;
+				position:absolute;
+				right:0px;
+				bottom:0px;
+			    display:none;
+			}
+			#sideTitle{
+				width:100%;
+				height:30px;
+				margin:0 auto;
+				background:#00a3cf;
+				line-height:30px;
+			}
+			#sideTitle #jian{
+				display:block;
+			    position:absolute;
+			    right:0px;
+			    top:3px;
+			    cursor:pointer;
+			}
+			#sideContent{
+				width:260px;
+				height:150px;
+				margin:10px auto;
+			    padding-left:30px;
+			}
+			#sideContent #slogan{
+			    width:94%;
+			    height:30px;
+			    line-height:30px;
+				font-size:14px;
+				font-family:sans-serif;
+			}
+			#sideContent ul{
+				height:120px;
+				width:94%;
+			}
+			#sideContent ul li{
+			 	font-size:12px;
+				font-family:Microsoft YaHei, 微软雅黑, Verdana, sans-serif, 宋体;
+				color:black;
+				height:2em;
+				width:100%;
+				line-height: 2em;
+				cursor:pointer;
+			}
 		</style>
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	</head>
 	<body>
+		<div id="broadside">
+		   	  <div id="bar">
+		   	      <div class="words">点点我</div>
+		   	  	  <img id="add" src="img/borderside_add.png">
+		   	  </div>
+		   	  <div id="mainside">
+		   	  	  <div id="sideTitle">
+		   	  	    <div class="words">更多链接</div> 
+		   	  	  	<img id="jian" src="img/borderside_jian.png">
+		   	  	  </div>
+		   	  	  <div id="sideContent">
+		   	  	      <div id="slogan">开放共享专业主动</div>
+		   	  	  	  <ul id="sideUl">
+		   	  	  	  	  <li>我们都是好孩子我们都是好孩子</li>
+		   	  	  	  	  <li>我们都是好孩子</li>
+		   	  	  	  	  <li>我们都是好孩子</li>
+		   	  	  	  	  <li>我们都是好孩子</li>
+		   	  	  	  	  
+		   	  	  	  </ul>
+		   	  	  </div>
+		   	  </div>
+		  </div>
+
 	 	 <div class="imgWrap"> 
 	 	 	<i id="prev"><img src="img/return.png"/></i> 
 	 	 	<i id="next"><img src="img/forward.png"/></i>
@@ -163,7 +268,46 @@
 					    index = 0;
 					}
 				});
+
+				//侧边气泡
+				showSide();
 			})
+
+
+		function $id(x){
+			return document.getElementById(x);
+		} 
+		
+		function showSide(){
+			var mainside = $("#mainside");
+			//点击展开
+			var add = $id("add");
+			add.onclick = function(){
+				$("#bar").hide("fast");
+				mainside.slideDown("slow");
+			}
+			
+			//点击收回
+			var back = $id("jian");
+			back.onclick = function(){
+				$("#bar").show("fast");
+				mainside.hide("slow");
+			}
+			
+			var sideUl =  $id("sideUl");
+			var sideLis =  sideUl.getElementsByTagName("li");
+			var size =sideLis.length;
+			for(var i = 0; i < size; i++){
+				sideLis[i].onmouseover = function(){
+					this.style.background = "#00a3cf";
+					this.style.color = "white";
+				}
+				sideLis[i].onmouseout = function(){
+					this.style.background = "#edf5f7";
+					this.style.color = "black";
+				}
+			}
+		}
 		</script>
 	</body>
 </html>
