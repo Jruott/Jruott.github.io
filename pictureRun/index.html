@@ -86,23 +86,24 @@
 			/*侧边气泡*/
 			#broadside{
 				width:300px;
-				height:190px;
+				height:220px;
 				position:fixed;
 				z-index:2;
-				bottom:300px;
+				bottom:0px;
 				right:0px;
 			}
 			#bar{
 				width:108px;
 				height:28px;
-			    line-height:28px;
+				line-height:28px;
 				background: #00a3cf;
 				position:absolute;
 				right:0px;
 				bottom:0px;
+				display:none;
 			}
 			.words{
-			    text-indent:1em;
+				text-indent:2em;
 				color:white;
 				font-size:14px;
 				font-weight:900;
@@ -110,86 +111,81 @@
 			}
 			#bar #add{
 				display:block;
-			    position:absolute;
-			    right:0px;
-			    top:1px;
-			    cursor:pointer;
+				position:absolute;
+				right:0px;
+				top:1px;
+				cursor:pointer;
 			}
 			#mainside{
 				width:300px;
-				height:185px;
-				background: #edf5f7;
+				height:220px;
 				position:absolute;
 				right:0px;
 				bottom:0px;
-			    display:none;
+				display:none;
 			}
 			#sideTitle{
 				width:100%;
-				height:30px;
-				margin:0 auto;
-				background:#00a3cf;
-				line-height:30px;
+				height:90px;
+				background-image:url("img/top-bg.PNG");
+				margin-left:-10px;
 			}
 			#sideTitle #jian{
 				display:block;
-			    position:absolute;
-			    right:0px;
-			    top:3px;
-			    cursor:pointer;
+				position:absolute;
+				right:10px;
+				top:75px;
+				cursor:pointer;
 			}
 			#sideContent{
 				width:260px;
-				height:150px;
-				margin:10px auto;
-			    padding-left:30px;
+				height:130px;
+				padding-top:20px;
+				padding-left:50px;
+				background: #edf5f7;
 			}
-			#sideContent #slogan{
-			    width:94%;
-			    height:30px;
-			    line-height:30px;
-				font-size:14px;
-				font-family:sans-serif;
-			}
+
 			#sideContent ul{
-				height:120px;
+				height:130;
 				width:94%;
 			}
 			#sideContent ul li{
-			 	font-size:12px;
+				font-size:14px;
 				font-family:Microsoft YaHei, 微软雅黑, Verdana, sans-serif, 宋体;
 				color:black;
 				height:2em;
 				width:100%;
 				line-height: 2em;
 				cursor:pointer;
+				list-style-image:url(img/point.png);
 			}
+			#sideContent ul a{
+				text-decoration:none;
+				color:black;
+			}
+
 		</style>
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 	</head>
 	<body>
 		<div id="broadside">
-		   	  <div id="bar">
-		   	      <div class="words">点点我</div>
-		   	  	  <img id="add" src="img/borderside_add.png">
-		   	  </div>
-		   	  <div id="mainside">
-		   	  	  <div id="sideTitle">
-		   	  	    <div class="words">更多链接</div> 
-		   	  	  	<img id="jian" src="img/borderside_jian.png">
-		   	  	  </div>
-		   	  	  <div id="sideContent">
-		   	  	      <div id="slogan">开放共享专业主动</div>
-		   	  	  	  <ul id="sideUl">
-		   	  	  	  	  <li>我们都是好孩子我们都是好孩子</li>
-		   	  	  	  	  <li>我们都是好孩子</li>
-		   	  	  	  	  <li>我们都是好孩子</li>
-		   	  	  	  	  <li>我们都是好孩子</li>
-		   	  	  	  	  
-		   	  	  	  </ul>
-		   	  	  </div>
-		   	  </div>
-		  </div>
+	   	  <div id="bar">
+	   	      <div class="words">点点我</div>
+	   	  	  <img id="add" src="img/borderside_add.png" />
+	   	  </div>
+	   	  <div id="mainside">
+	   	  	  <div id="sideTitle">
+	   	  	  	<img id="jian" src="img/quit.png" />
+	   	  	  </div>
+	   	  	  <div id="sideContent">
+	   	  	  	  <ul id="sideUl">
+	   	  	  	  	  <a target="_blank" href="#"><li>“3+1”人才培养模式和卓越模式</li></a>
+	   	  	  	  	  <a target="_blank" href="#"><li>产学研基地</li></a>
+	   	  	  	  	  <a target="_blank" href="#"><li>创新人才培养效果</li></a>
+	   	  	  	  </ul>
+	   	  	  </div>
+	   	  </div>
+	   </div>
 
 	 	 <div class="imgWrap"> 
 	 	 	<i id="prev"><img src="img/return.png"/></i> 
@@ -280,20 +276,25 @@
 		
 		function showSide(){
 			var mainside = $("#mainside");
+			mainside.slideDown("slow");
 			//点击展开
 			var add = $id("add");
 			add.onclick = function(){
 				$("#bar").hide("fast");
 				mainside.slideDown("slow");
 			}
-			
+			add.onmouseover = function(){
+				add.title = "打开";
+			}
 			//点击收回
 			var back = $id("jian");
 			back.onclick = function(){
 				$("#bar").show("fast");
 				mainside.hide("slow");
 			}
-			
+			back.onmouseover = function(){
+				back.title = "关闭";
+			}
 			var sideUl =  $id("sideUl");
 			var sideLis =  sideUl.getElementsByTagName("li");
 			var size =sideLis.length;
